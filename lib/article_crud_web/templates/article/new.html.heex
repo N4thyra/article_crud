@@ -1,0 +1,19 @@
+<h2>Add New</h2>
+
+<%= form_for @changeset, Routes.article_path(@conn, :create), fn f -> %>
+    <div>
+        <%= label f, :title, class: "control-label" %>
+        <%= text_input f, :title, class: "form-control" %>
+        <%= error_tag f, :title %>
+    </div>
+
+    <div>
+        <%= label f, :body, class: "control-label" %>
+        <%= text_input f, :body, class: "form-control" %>
+        <%= error_tag f, :body %>
+    </div>
+
+    <div>
+       <%= submit "Submit", class: "btn btn-primary" %>
+    </div>
+<% end %>

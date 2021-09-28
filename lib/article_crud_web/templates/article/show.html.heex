@@ -1,0 +1,5 @@
+<h1><%= @article.title %></h1>
+<p><%= @article.body %></p>
+
+ <%= link "Edit", to: Routes.article_path(@conn, :edit, @article.id) %>
+ <%= link "Delete", to: Routes.article_path(@conn, :delete, @article.id), method: :delete, data: [confirm: "Are you sure?"] %>
