@@ -21,7 +21,6 @@ defmodule ArticleCrudWeb.ArticleController do
     render(conn, "new.html", changeset: GetArticlesItem)
   end
 
-  @spec create(any, any) :: none
   def create(conn, %{"Elixir.ArticleCrud.EctoGenOutput.Models.GetArticlesItem" => data}) do
 
     case Article.create_article(data["title"], data["body"]) do
@@ -35,8 +34,9 @@ defmodule ArticleCrudWeb.ArticleController do
 
   def edit(conn, %{"id" => id}) do
     article = Article.get_article(id)
-    render(conn, "edit.html", changeset: GetArticlesItem, article: article)
+    render(conn, "edit.html", changeset: GetArticlesItem, id: id)
   end
+
 
   def update(conn, %{"id" => id, "Elixir.ArticleCrud.EctoGenOutput.Models.GetArticlesItem" => data}) do
     case Article.update_article(id, data) do

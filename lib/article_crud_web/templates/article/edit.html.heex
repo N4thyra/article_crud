@@ -1,6 +1,6 @@
 <h2>Edit</h2>
 
-<%= form_for @changeset, Routes.article_path(@conn, :update, @article), fn f -> %>
+<%= form_for @changeset, Routes.article_path(@conn, :update, @id), fn f -> %>
     <div>
         <%= label f, :title, class: "control-label" %>
         <%= text_input f, :title, class: "form-control" %>
