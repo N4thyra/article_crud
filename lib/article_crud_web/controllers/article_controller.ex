@@ -34,11 +34,12 @@ defmodule ArticleCrudWeb.ArticleController do
 
   def edit(conn, %{"id" => id}) do
     article = Article.get_article(id)
-    render(conn, "edit.html", changeset: GetArticlesItem, id: id)
+    changeset = Article.change_article(article)
+    render(conn, "edit.html", changeset: changeset, id: id)
   end
 
 
-  def update(conn, %{"id" => id, "Elixir.ArticleCrud.EctoGenOutput.Models.GetArticlesItem" => data}) do
+  def update(conn, %{"id" => id, "get_articles_item" => data}) do
     case Article.update_article(id, data) do
       {:ok, _} ->
         conn
