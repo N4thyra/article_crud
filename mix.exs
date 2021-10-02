@@ -49,7 +49,7 @@ defmodule ArticleCrud.MixProject do
       {:gettext, "~> 0.18"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
-      {:ecto_gen, "~> 0.7.1", runtime: false, only: :dev},
+      {:ecto_gen, "~> 0.8.5", runtime: false, only: :dev},
     ]
   end
 
