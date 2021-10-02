@@ -17,12 +17,12 @@ config :article_crud, ArticleCrud.Repo,
 
     # This way, you can provide custom template for individual parts of generation
     # default files are in /priv/templates directory of this package
-  template_overrides: [
-    db_module: "./db_module.ex.eex",
-    routine: "./db_routine.ex.eex",
-    routine_result: "./db_routine_result.ex.eex",
-    routine_parser: "./db_routine_parser.ex.eex"
-  ],
+  #template_overrides: [
+  #  db_module: "./db_module.ex.eex",
+  #  routine: "./db_routine.ex.eex",
+  #  routine_result: "./db_routine_result.ex.eex",
+  #  routine_parser: "./db_routine_parser.ex.eex"
+  #],
 
     # This config holds information about what routines (funcs) from database will have generated elixir functions etc.
     # db project has keys, each representing database's schema which has config for what routines it includes/ingores
