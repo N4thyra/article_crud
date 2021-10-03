@@ -43,16 +43,18 @@ config :article_crud, ArticleCrud.Repo,
 # watchers to your application. For example, we use it
 # with esbuild to bundle .js and .css sources.
 config :article_crud, ArticleCrudWeb.Endpoint,
-  # Binding to loopback ipv4 address prevents access from other machines.
-  # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
-  http: [ip: {127, 0, 0, 1}, port: 4000],
-  check_origin: false,
-  code_reloader: true,
+  http: [port: 4000],
   debug_errors: true,
+  code_reloader: true,
+  check_origin: false,
   secret_key_base: "KxfRhHSG/S1846I2DF1tbgAm10ImcodtnNvrS/ytoRFL/0nUImmULvX6oUJCFsvg",
   watchers: [
-    # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
-    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
+    node: [
+      "node_modules/rollup/dist/bin/rollup",
+      "--config",
+      "--watch",
+      cd: Path.expand("../assets", __DIR__)
+    ]
   ]
 
 # ## SSL Support

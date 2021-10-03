@@ -19,7 +19,7 @@ console.log("Production:", production)
 
 // --------- Define apps here ---------
 // let apps = []
-let apps = ["numbers", "connect", "like", "subscription-form", "notifications"]
+let apps = ["numbers", "connect", "like", "subscription-form", "notifications", "text-input", "text-area"]
 // ------------------------------------
 
 const appBasePath = (name) => `/apps/${name}`
@@ -82,7 +82,6 @@ const main = {
           },
         },
       }),
-
       // enable run-time checks when not in production
       dev: !production,
 

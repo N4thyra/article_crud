@@ -2,6 +2,7 @@ defmodule ArticleCrudWeb.ArticleController do
   use ArticleCrudWeb, :controller
   alias Article.Article
   alias ArticleCrud.EctoGenOutput.Models.GetArticlesItem
+  alias ArticleCrudWeb.Apps
 
   def index(conn, _params) do
     articles = Article.get_articles()
@@ -18,9 +19,12 @@ defmodule ArticleCrudWeb.ArticleController do
   end
 
   def new(conn, _params) do
-    render(conn, "new.html", changeset: GetArticlesItem)
+    conn
+      |> Apps.include(["text-input", "text-area"])
+      |> render("new.html", changeset: GetArticlesItem)
   end
 
+  @spec create(Plug.Conn.t(), map) :: Plug.Conn.t()
   def create(conn, %{"Elixir.ArticleCrud.EctoGenOutput.Models.GetArticlesItem" => data}) do
 
     case Article.create_article(data["title"], data["body"]) do
@@ -35,7 +39,10 @@ defmodule ArticleCrudWeb.ArticleController do
   def edit(conn, %{"id" => id}) do
     article = Article.get_article(id)
     changeset = Article.change_article(article)
-    render(conn, "edit.html", changeset: changeset, id: id)
+
+    conn
+      |> Apps.include(["text-input", "text-area"])
+      |> render("edit.html", changeset: changeset, id: id)
   end
 
 

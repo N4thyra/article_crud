@@ -5,12 +5,13 @@ defmodule ArticleCrud.MixProject do
     [
       app: :article_crud,
       version: "0.1.0",
-      elixir: "~> 1.12",
+      elixir: "~> 1.7",
       elixirc_paths: elixirc_paths(Mix.env()),
-      compilers: [:gettext] ++ Mix.compilers(),
+      compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      releases: releases()
     ]
   end
 
@@ -50,6 +51,7 @@ defmodule ArticleCrud.MixProject do
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
       {:ecto_gen, "~> 0.8.5", runtime: false, only: :dev},
+      {:simplificator_3000, "~> 0.1.0"}
     ]
   end
 
@@ -61,11 +63,23 @@ defmodule ArticleCrud.MixProject do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
-      setup: ["deps.get", "ecto.setup"],
+      setup: ["assets.setup", "assets.build", "deps.get"],
+      "assets.setup": ["cmd --cd assets npm i"],
+      "assets.build": ["cmd --cd assets npm run deploy"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
-      "assets.deploy": ["esbuild default --minify", "phx.digest"]
+      test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"]
+      #test: ["test"]
+    ]
+  end
+
+  defp releases do
+    [
+      rollup_test: [
+        applications: [
+          rollup_test: :permanent
+        ]
+      ]
     ]
   end
 end

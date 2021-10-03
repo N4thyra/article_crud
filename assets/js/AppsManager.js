@@ -17,6 +17,8 @@ class AppsManager {
     Object.entries(this.apps).forEach(([name, constructor]) => {
       let elements = document.querySelectorAll(`[data-app='${name}'`);
 
+      console.log(elements);
+
       elements.forEach(element => {
         let filteredDataset = Object.entries(element.dataset).filter(([key, _]) => key !== "app")
         let props = Object.fromEntries(filteredDataset)

@@ -7,4 +7,3 @@ import "../css/global.scss"
 
 import "./AppsManager"
 import "./NotificationManager"
-
