@@ -2,14 +2,16 @@
 
 <%= form_for @changeset, Routes.article_path(@conn, :update, @id), fn f -> %>
     <div>
-        <%= label f, :title, class: "control-label" %>
-        <%= text_input f, :title, class: "form-control" %>
+        <% label f, :title, class: "control-label" %>
+        <span data-app="text-input" data-placeholder={:title} data-value={@article.title} data-name={:title}></span>
+        <% text_input f, :title, class: "form-control" %>
         <%= error_tag f, :title %>
     </div>
 
     <div>
-        <%= label f, :body, class: "control-label" %>
-        <%= text_input f, :body, class: "form-control" %>
+        <% label f, :body, class: "control-label" %>
+        <span data-app="text-area" data-placeholder={:body} data-value={@article.body} data-name={:body}></span>
+        <% text_input f, :body, class: "form-control" %>
         <%= error_tag f, :body %>
     </div>
 

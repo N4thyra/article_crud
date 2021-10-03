@@ -22,8 +22,8 @@ defmodule Article.Article do
   end
 
 
-  def update_article(id, article) do
-    DbContext.update_article(String.to_integer(id), article["title"], article["body"])
+  def update_article(id, title, body) do
+    DbContext.update_article(String.to_integer(id), title, body)
   end
 
   def delete_article(id) do
