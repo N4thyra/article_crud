@@ -26,13 +26,17 @@ defmodule ArticleCrudWeb.ArticleController do
 
   @spec create(Plug.Conn.t(), map) :: Plug.Conn.t()
   def create(conn, %{"title" => title, "body" => body}) do
-
-    case Article.create_article(title, body) do
+    case Article.changeset(%Article{}, %{"title" => title, "body" => body}) do
       {:ok, _} ->
+        Article.create_article(title, body)
         conn
           |> put_flash(:info, "Article created!")
           |> redirect(to: Routes.article_path(conn, :index))
-    end
+      {:error, changeset} ->
+         conn
+          |> Apps.include(["text-input", "text-area"])
+          |> render("new.html", changeset: changeset, title: title, body: body)
+      end
   end
 
 
@@ -41,16 +45,21 @@ defmodule ArticleCrudWeb.ArticleController do
 
     conn
       |> Apps.include(["text-input", "text-area"])
-      |> render("edit.html", changeset: :nil, article: article, id: id)
+      |> render("edit.html", changeset: nil, article: article, id: id)
   end
 
 
   def update(conn, %{"id" => id, "title" => title, "body" => body}) do
-    case Article.update_article(id, title, body) do
+    case Article.changeset(%Article{}, %{"title" => title, "body" => body}) do
       {:ok, _} ->
+        Article.update_article(id, title, body)
         conn
           |> put_flash(:info, "Article updated!")
           |> redirect(to: Routes.article_path(conn, :index))
+      {:error, changeset} ->
+         conn
+          |> Apps.include(["text-input", "text-area"])
+          |> render("edit.html", changeset: changeset, article: %{:title => title, :body => body}, id: id)
     end
   end
 

@@ -3,14 +3,14 @@
 <%= form_for @changeset, Routes.article_path(@conn, :create), fn f -> %>
     <div>
         <% label f, :title, class: "control-label" %>
-        <span data-app="text-input" data-placeholder={:title} data-name={:title}></span>
+        <span data-app="text-input" data-placeholder={:title} data-value={@title} data-name={:title}></span>
         <% text_input f, :title, class: "form-control" %>
         <%= error_tag f, :title %>
     </div>
 
     <div>
         <% label f, :body, class: "control-label" %>
-        <span data-app="text-area" data-placeholder={:body} data-name={:body}></span>
+        <span data-app="text-area" data-placeholder={:body} data-value={@body} data-name={:body}></span>
         <% text_input f, :body, class: "form-control" %>
         <%= error_tag f, :body %>
     </div>
