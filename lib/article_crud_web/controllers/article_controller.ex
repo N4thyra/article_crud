@@ -21,7 +21,7 @@ defmodule ArticleCrudWeb.ArticleController do
 
     conn
       |> Apps.include(["text-input", "text-area"])
-      |> render("new.html", changeset: :nil)
+      |> render("new.html", changeset: :nil, title: nil, body: nil)
   end
 
   @spec create(Plug.Conn.t(), map) :: Plug.Conn.t()
